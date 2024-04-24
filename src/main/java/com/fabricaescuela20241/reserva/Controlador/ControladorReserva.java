@@ -16,7 +16,7 @@ import com.fabricaescuela20241.reserva.Modelo.Reserva;
 import com.fabricaescuela20241.reserva.Servicio.ServicioReserva;
 
 @RestController
-@RequestMapping("/reservas")
+@RequestMapping("/reserva")
 public class ControladorReserva {
     
     @Autowired
@@ -37,17 +37,17 @@ public class ControladorReserva {
         return servicioReserva.obtenerReservaPorId(id);
     }
 
-    @PostMapping("/crearReserva")
+    @PostMapping("/crear")
     public Reserva crearReserva(@RequestBody Reserva reserva) {
         return servicioReserva.guardarReserva(reserva);
     }
 
-    @PutMapping("/actualizarReserva/{id}")
+    @PutMapping("/actualizar/{id}")
     public Reserva actualizarReserva(@PathVariable int id, @RequestBody Reserva reserva) {
         return servicioReserva.guardarReserva(reserva);
     }
 
-    @DeleteMapping("/eliminarReserva/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public void eliminarReserva(@PathVariable int id) {
         servicioReserva.eliminarReservaPorId(id);
     }

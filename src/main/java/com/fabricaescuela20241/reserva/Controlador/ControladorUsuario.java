@@ -16,7 +16,7 @@ import com.fabricaescuela20241.reserva.Modelo.Usuario;
 import com.fabricaescuela20241.reserva.Servicio.ServicioUsuario;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/usuario")
 public class ControladorUsuario {
 
     @Autowired
@@ -31,12 +31,12 @@ public class ControladorUsuario {
         return servicioUsuario.obtenerTodosLosUsuarios();
     }
 
-    @GetMapping("/usuario/{id}")
+    @GetMapping("/{id}")
     public Usuario obtenerUsuarioPorId(@PathVariable int id) {
         return servicioUsuario.obtenerUsuarioPorId(id);
     }
 
-    @PostMapping("/agregarUsuario")
+    @PostMapping("/agregar")
     public Usuario crearUsuario(@RequestBody Usuario user) {
         return servicioUsuario.guardarUsuario(user);
     }
