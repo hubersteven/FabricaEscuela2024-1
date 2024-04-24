@@ -32,4 +32,8 @@ public class ServicioReserva {
         repositorioReserva.deleteById(id);
     }
 
+    public long contarReservas(){
+        return repositorioReserva.count();
+    }
+
 }
