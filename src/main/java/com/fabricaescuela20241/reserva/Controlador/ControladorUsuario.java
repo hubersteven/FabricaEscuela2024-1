@@ -3,6 +3,7 @@ package com.fabricaescuela20241.reserva.Controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,18 +38,28 @@ public class ControladorUsuario {
     }
 
     @PostMapping("/agregar")
-    public Usuario crearUsuario(@RequestBody Usuario user) {
+    public ResponseEntity<String> crearUsuario(@RequestBody Usuario user) {
         return servicioUsuario.guardarUsuario(user);
     }
 
     @PutMapping("/actualizar/{id}")
-    public Usuario actualizarUsuario(@PathVariable Long id, @RequestBody Usuario user) {
-        return servicioUsuario.guardarUsuario(user);
+    public ResponseEntity<String> actualizarUsuario(@PathVariable int id, @RequestBody Usuario user) {
+        boolean flag = servicioUsuario.actualizarUsuario(id, user);
+        if (flag){
+            return ResponseEntity.ok("Usuario actualizado exitosamente");
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @DeleteMapping("/borrar/{id}")
-    public void eliminarUsuario(@PathVariable int id) {
-        servicioUsuario.eliminarUsuarioPorId(id);
+    public ResponseEntity<String> eliminarUsuario(@PathVariable int id) {
+        boolean flag = servicioUsuario.eliminarUsuarioPorId(id);
+        if (flag){
+            return ResponseEntity.ok("Usuario eliminado exitosamente");
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
 }

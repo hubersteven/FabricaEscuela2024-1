@@ -3,6 +3,7 @@ package com.fabricaescuela20241.reserva.Controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,6 @@ public class ControladorReserva {
     @Autowired
     private final ServicioReserva servicioReserva;
 
-    
     public ControladorReserva(ServicioReserva servicioReserva) {
         this.servicioReserva = servicioReserva;
     }
@@ -43,13 +43,22 @@ public class ControladorReserva {
     }
 
     @PutMapping("/actualizar/{id}")
-    public Reserva actualizarReserva(@PathVariable int id, @RequestBody Reserva reserva) {
-        return servicioReserva.guardarReserva(reserva);
+    public ResponseEntity<String> actualizarReserva(@PathVariable int id, @RequestBody Reserva reserva) {
+        boolean flag = servicioReserva.actualizarReserva(id, reserva);
+        if (flag){
+            return ResponseEntity.ok("Reserva actualizado exitosamente");
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public void eliminarReserva(@PathVariable int id) {
-        servicioReserva.eliminarReservaPorId(id);
+    public ResponseEntity<String> eliminarReserva(@PathVariable int id) {
+        boolean flag = servicioReserva.eliminarReservaPorId(id);
+        if (flag){
+            return ResponseEntity.ok("Reserva eliminada exitosamente");
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
-
 }
